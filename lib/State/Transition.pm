@@ -93,9 +93,13 @@ You can define multiple ranges seperated with a comma.
 
 Simple on/off state.
 
-=item 'counter:12 -flag' => ...
+=item 'enum:on,off,auto' => ...
 
-State will be active when counter == 12 and flag is off.
+Enumeration, the first is the default.
+
+=item 'counter:12 -flag -enum:auto' => ...
+
+State will be active when counter == 12, flag is off and enum is not auto.
 
 =item '' => ...
 
@@ -112,9 +116,14 @@ Counters are simple positive integers as a state. At a rule you can use them wit
 Flags are only on/off states. You can multiple times work on that state and a
 single done will finish that. Another finish will do nothing at all.
 
+=item enums   => '...'
+
+Enums are multivalue flags. A call to done() will do the same then a call to
+work(). You always have to submit the new value like 'enum:off'.
+
 =item initial => '...'
 
-Here you can define the initial state of the object. Defaults to an empty string (''), that means every defined counter is 0 and every defined flag is off.
+Here you can define the initial state of the object. Defaults to an empty string (''), that means every defined counter is 0, every defined flag is off and every defined enum is at default.
 
 =back
 
