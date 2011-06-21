@@ -69,6 +69,10 @@ The simplest form. Enabled when counter is > 0, disabled when counter == 0. Nega
 
 The same as 'counter'.
 
+=item 'counter:1..*' => ...
+
+The same as 'counter'.
+
 =item '-counter' => ...
 
 Inverts the meaning of '+counter'.
