@@ -12,13 +12,13 @@ package State::Transition;
         counters => 'counter1 ...',
         flags    => 'flag1 ...',
         rules    => {
-            'counter1' => { enter => $enter1 },
-            'flag1'    => { leave => $leave1 },
-            ''         => { enter => $enter2, leave => $leave2 },
+            'counter1' => { enter => \&enter1 },
+            'flag1'    => { leave => \&leave1 },
+            ''         => { enter => \&enter2, leave => \&leave2 },
         },
     );
 
-    $tran->work('counter1'); # execute $enter1->() and $leave2->()
+    $tran->work('counter1'); # execute enter1() and leave2()
     ...
     $tran->work('counter1');
     ...
@@ -26,9 +26,9 @@ package State::Transition;
     ...
     $tran->work('flag1');
     ...
-    $tran->done('counter1 flag1'); # execute $leave1->()
+    $tran->done('counter1 flag1'); # execute leave1()
     ...
-    $tran->done('counter1') for 1..2; # execute $enter2->()
+    $tran->done('counter1') for 1..2; # execute enter2()
     ...
 
 =head1 DESCRIPTION
@@ -53,8 +53,9 @@ The constructor supports these arguments (all as C<< key => value >> pairs).
 
 Here you can define the rules (state combinations). Allowed are combinations
 of every single state (counters, flags, ... seperated by spaces). If there are
-more then one state in a rule, it will be and-associated. In every rule a
-state has to be unique. You can also pass function names as callbacks, in that case the object has to support this ($tran->$callback() will be called, use base 'State::Transition').
+more then one state in a rule, it will be and-associated. In every rule a state
+has to be unique. You can also pass function names as callbacks, in that case
+the object has to support this ($tran->$callback() will be called, use base 'State::Transition' in your class).
 
 Some examples
 
