@@ -134,7 +134,7 @@ sub new {
 
 =item $tran->work ($state)
 
-This will increment all counter-states and enable all flag-states that are disabled.
+This will increment all counter-states and enable all flag-states that are disabled. Enums are set to the submitted value.
 
 =cut
 
@@ -143,7 +143,7 @@ sub work {
 
 =item $tran->done ($state)
 
-This will decrement all counter-states and disable all flag-states that are enabled.
+This will decrement all counter-states and disable all flag-states that are enabled. Enums are set to the submitted value.
 
 =cut
 
